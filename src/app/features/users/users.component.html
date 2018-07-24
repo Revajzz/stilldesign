@@ -1,0 +1,4 @@
+<div class="users">
+  <app-user-list (select)="select($event)"></app-user-list>
+  <app-user-form [user]="selected" (createdUser)="createdUser($event)"></app-user-form>
+</div>

@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  background: #f8f9fa!important;
+
+  span {
+    margin: 0 2em;
+
+    a {
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<div class="user-list">
+  <div class="loader" *ngIf="loading">
+    L O A D I N G
+  </div>
+  <h2>List
+    <small>
+      <a (click)="refresh()" class="btn btn-link" style="float:right;">
+        <i class="fa fa-refresh"></i>
+      </a>
+    </small>
+  </h2>
+
+  <div class="list-group" style="overflow: auto;">
+    <span *ngFor="let u of users" class="list-group-item list-group-item-action" [ngClass]="{ 'list-group-item-success': u.active == 1, 'list-group-item-danger': u.active == 0}">
+
+      <span class="link">
+        <span placement="right" ngbTooltip="Edit" (click)="editUser(u.id)">
+          <i class="fa fa-edit"></i>
+        </span>
+        <span placement="right" ngbTooltip="Delete" (click)="deleteUser(u.id)">
+          <i class="fa fa-remove"></i>
+        </span>
+      </span>
+      <span>
+        <span>
+          <i class="fa fa-user"></i>
+        </span>
+        <span>{{ u.firstName }} {{ u.lastName }}</span>
+      </span>
+      <span>
+        <span>
+          <i class="fa fa-at"></i>
+        </span>
+        <span>{{ u.email }}</span>
+      </span>
+    </span>
+  </div>
+</div>

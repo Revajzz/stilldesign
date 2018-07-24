@@ -1,0 +1,21 @@
+<div class="header">
+  <span><img height="40px" src="https://stilldesign.hu/wp-content/themes/stilldesign3/img/logo.png" alt=""></span>
+
+  <div class="spacer"></div>
+
+  <span><a class="hvr-float" placement="bottom" ngbTooltip="Go to Home" routerLink="/home">Home</a></span>
+  <span><a class="hvr-float" placement="bottom" ngbTooltip="Go to Users" routerLink="/users">Users</a></span>
+  <span>
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Authentication</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button class="dropdown-item" routerLink="/auth/login">Login</button>
+        <button class="dropdown-item" routerLink="/auth/register" disabled>Register</button>
+        <hr>
+        <button class="dropdown-item" routerLink="/auth/reset-password" disabled>Reset Password</button>
+        <hr>
+        <button class="dropdown-item">Logout</button>
+      </div>
+    </div>
+  </span>
+</div>
