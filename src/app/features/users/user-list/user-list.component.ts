@@ -29,14 +29,11 @@ export class UserListComponent implements OnInit {
     this.loading = true;
     this.users = [];
 
-    this.userListService.getAccessToken()
-      .subscribe(data => {
-        this.getUsers(data.access_token);
-      });
+    this.getUsers();
   }
 
-  getUsers(accessToken: string) {
-    this.userListService.getUsers(accessToken)
+  getUsers() {
+    this.userListService.getUsers()
       .subscribe(
         users => {
           this.users = users.data;
@@ -49,12 +46,9 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(id) {
-    this.userListService.getAccessToken()
-      .subscribe(data => {
-        this.userListService.deleteUser(data.access_token, id).subscribe(u => {
-          this.refresh();
-        });
-      });
+    this.userListService.deleteUser(id).subscribe(u => {
+      this.refresh();
+    });
 
     this.refresh();
   }

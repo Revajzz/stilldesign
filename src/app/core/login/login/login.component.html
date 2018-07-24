@@ -1,27 +1,17 @@
 <div class="login-form">
   <h2>Login</h2>
 
-  <div class="collapse" [ngbCollapse]="!isCollapsed">
-    <div class="card card-body">
-        status: {{ loginForm.status | json }}
-        <hr>
-        {{ loginForm.value | json }}
-    </div>
-  </div>
-
-  <form [formGroup]="loginForm">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <input type="text" class="form-control" id="username" aria-describedby="username-help" formControlName="name" placeholder="Username">
-      <!-- <small *ngIf="username.invalid && (username.dirty || username.touched)" id="username-help" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+      <input type="text" class="form-control" id="username" formControlName="username" placeholder="Username">
     </div>
 
     <div class="form-group">
-      <input type="password" class="form-control" id="password" aria-describedby="password-help" formControlName="password" placeholder="Password">
-      <!-- <small *ngIf="password.invalid && (password.dirty || password.touched)" id="password-help" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+      <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
     </div>
 
     <div class="form-group" style="display: flex;">
-      <button type="button" class="btn btn-primary">Login</button>
+      <button class="btn btn-primary">Login</button>
       &nbsp;&nbsp;
       <button type="button" class="btn btn-light" disabled>Register</button>
       <div class="spacer"></div>

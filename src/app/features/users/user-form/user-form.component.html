@@ -1,7 +1,4 @@
 <div class="user-form">
-  <div class="loader" *ngIf="loading">
-    L O A D I N G
-  </div>
   <h2>Form
     <small>
       <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
@@ -21,7 +18,11 @@
     </div>
   </div>
 
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div class="loader" *ngIf="loading">
+    L O A D I N G
+  </div>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
 
     <div class="form-group" *ngIf="!jumpTypeNew">
       <input type="text" class="form-control" id="id" formControlName="id" placeholder="ID" [disabled]="true">

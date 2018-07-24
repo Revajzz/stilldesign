@@ -1,7 +1,4 @@
 <div class="user-list">
-  <div class="loader" *ngIf="loading">
-    L O A D I N G
-  </div>
   <h2>List
     <small>
       <a (click)="refresh()" class="btn btn-link" style="float:right;">
@@ -9,6 +6,10 @@
       </a>
     </small>
   </h2>
+
+  <div class="loader" *ngIf="loading">
+    L O A D I N G
+  </div>
 
   <div class="list-group" style="overflow: auto;">
     <span *ngFor="let u of users" class="list-group-item list-group-item-action" [ngClass]="{ 'list-group-item-success': u.active == 1, 'list-group-item-danger': u.active == 0}">

@@ -25,12 +25,9 @@ export class UserFormComponent implements OnInit {
     this.loading = false;
 
     if (this._userId) {
-      this.userFormService.getAccessToken()
-        .subscribe(data => {
-          this.userFormService.getUserById(data.access_token, this._userId)
-            .subscribe(u => this.currentUser = u.data);
-          this.loading = false;
-        });
+      this.userFormService.getUserById(this._userId)
+        .subscribe(u => this.currentUser = u.data);
+      this.loading = false;
     } else {
       this.currentUser = {};
     }
@@ -64,28 +61,22 @@ export class UserFormComponent implements OnInit {
     this.loading = true;
 
     if (this.jumpTypeNew) {
-      this.userFormService.getAccessToken()
-        .subscribe(data => {
-          this.userFormService.createUser(data.access_token, this.userForm.value)
-            .subscribe(res => {
-              this.loading = false;
-              this.createdUser.emit(this.userForm.value);
+      this.userFormService.createUser(this.userForm.value)
+        .subscribe(res => {
+          this.loading = false;
+          this.createdUser.emit(this.userForm.value);
 
-              this.currentUser = {};
-              this.createForm(this.currentUser);
-            });
+          this.currentUser = {};
+          this.createForm(this.currentUser);
         });
 
     } else {
-      this.userFormService.getAccessToken()
-        .subscribe(data => {
-          this.userFormService.updateUser(data.access_token, this.userForm.value)
-            .subscribe(res => {
-              this.loading = false;
+      this.userFormService.updateUser(this.userForm.value)
+        .subscribe(res => {
+          this.loading = false;
 
-              this.currentUser = {};
-              this.createForm(this.currentUser);
-            });
+          this.currentUser = {};
+          this.createForm(this.currentUser);
         });
     }
   }

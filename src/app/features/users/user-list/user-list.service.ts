@@ -4,59 +4,36 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 import { User } from '../user.model';
+import { AuthService } from '../../../core/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserListService {
 
-  private oauthUrl = 'http://api.demo.iss.stilldesign.work/oauth/token';
   private usersUrl = 'http://api.demo.iss.stilldesign.work/admin/user';
 
-  constructor(private http: Http) { }
+  private accessToken;
+  private headers;
 
-  getAccessToken() {
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
+  constructor(private http: Http, private auth: AuthService) {
+    this.accessToken = this.auth.getAccessToken();
+
+    this.headers = new Headers({
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.accessToken,
     });
-
-    const postData = {
-      grant_type: 'password',
-      client_id: 2,
-      client_secret: 'Admin_Production',
-      username: 'dev@stilldesign.hu',
-      password: 'StillPass',
-      scope: ''
-    };
-
-    return this.http.post(this.oauthUrl, JSON.stringify(postData), {
-      headers: headers
-    })
-      .map((res: Response) => res.json());
   }
 
-  getUsers(accessToken: string): Observable<User[]> {
-
-    const headers = new Headers({
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ' + accessToken,
-    });
-
+  getUsers(): Observable<User[]> {
     return this.http.get(this.usersUrl, {
-      headers: headers
+      headers: this.headers
     }).map((res: Response) => res.json());
   }
 
-  deleteUser(accessToken: string, id: number) {
-
-    const headers = new Headers({
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ' + accessToken,
-    });
-
+  deleteUser(id: number) {
     return this.http.delete(this.usersUrl + '/' + id, {
-      headers: headers
+      headers: this.headers
     }).map((res: Response) => res.json());
   }
 }
